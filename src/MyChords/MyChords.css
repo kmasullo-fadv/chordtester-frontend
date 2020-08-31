@@ -1,0 +1,21 @@
+h2 {
+    color: lightgrey;
+    text-align: center;
+    margin-top: 5%;
+}
+
+.my-chords {
+    display: flex;
+    justify-content: space-evenly;
+    color: lightgrey;
+    margin-top: 3%;
+}
+
+.song-div {
+    text-align: center;
+    border-style: solid;
+    border-color: lightslategrey;
+    padding: 10px;
+    margin: 0 5px;
+    width: 30%;
+}
