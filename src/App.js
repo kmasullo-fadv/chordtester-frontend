@@ -4,7 +4,7 @@ import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
 import HearChords from './HearChords/HearChords'
 import MyChords from './MyChords/MyChords'
-// import Account from './Account/Account'
+import Account from './Account/Account'
 import { Route } from 'react-router-dom'
 import Context from './Context';
 import * as Tone from 'tone'
@@ -68,10 +68,10 @@ class App extends Component {
           path='/mychords'
           component={MyChords}
         />
-        {/* <Route
+        <Route
           path='/account'
           component={Account}
-        /> */}
+        />
 
 
       </ Context.Provider>
