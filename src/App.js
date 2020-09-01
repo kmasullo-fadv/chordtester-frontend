@@ -26,21 +26,23 @@ class App extends Component {
   }
 
   clearNotes = () => {
-    this.setState({notes: []})
+    this.setState({ notes: [] })
   }
 
   buildChord = async () => {
+    let chord = [];
     for (let i = 0; i < this.state.notes.length; i++) {
-      let note = new Tone.Player(process.env.PUBLIC_URL + `${this.state.notes[i]}`).toDestination();
-      try {
-        await Tone.loaded()
-      }
-      catch (e) {
-        console.error(e)
-        throw (e)
-      }
-      note.start()
+      chord[i] = new Tone.Player(process.env.PUBLIC_URL + `${this.state.notes[i]}`).toDestination();
     }
+    try {
+      await Tone.loaded()
+    }
+    catch (e) {
+      console.error(e)
+      throw (e)
+    }
+    chord.forEach((note) => note.start())
+
   }
 
   render() {
