@@ -1,17 +1,35 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
 import HearChords from './HearChords/HearChords'
 import MyChords from './MyChords/MyChords'
 import Account from './Account/Account'
-import { Route } from 'react-router-dom'
+import LoginPage from './LoginPage/LoginPage'
 import Context from './Context';
 import * as Tone from 'tone'
+import PrivateRoute from './Utils/PrivateRoute';
+import PublicRoute from './Utils/PublicRoute';
 
 class App extends Component {
   state = {
-    notes: []
+    notes: [],
+    hasError: false,
+    isLoggedIn: false
+  }
+
+  static getDerivedStateFromError(error) {
+    console.error(error);
+    return {hasError: true}
+  }
+
+  setLogIn = () => {
+    this.setState({isLoggedIn: true})
+  }
+
+  setLogOut = () => {
+    this.setState({isLoggedIn: false})
   }
 
   addNote = newNote => {
@@ -51,31 +69,40 @@ class App extends Component {
       addNote: this.addNote,
       deleteNote: this.deleteNote,
       buildChord: this.buildChord,
-      clearNotes: this.clearNotes
+      clearNotes: this.clearNotes,
+      logOut: this.setLogOut,
+      logIn: this.setLogIn
     }
     return (
       <Context.Provider value={value}>
         <header><h1>ChordTester</h1></header>
-        <NavMenu /><br />
-        <Route
-          exact
-          path='/'
-          component={Home}
-        />
-        <Route
-          path='/hearchords'
-          component={HearChords}
-        />
-        <Route
-          path='/mychords'
-          component={MyChords}
-        />
-        <Route
-          path='/account'
-          component={Account}
-        />
-
-
+        <main>
+          {this.state.hasError && <p>There was an error!</p>}
+          <NavMenu loggedin={this.state.isLoggedIn}/><br />
+          <Switch>
+            <Route
+              exact
+              path='/'
+              component={Home}
+            />
+            <Route
+              path='/hearchords'
+              component={HearChords}
+            />
+            <PrivateRoute
+              path='/mychords'
+              component={MyChords}
+            />
+            <PublicRoute
+              path='/account'
+              component={Account}
+            />
+            <PublicRoute
+              path='/login'
+              component={LoginPage}
+            />
+          </Switch>
+        </main>
       </ Context.Provider>
     )
   }
