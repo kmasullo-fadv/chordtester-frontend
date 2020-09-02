@@ -4,6 +4,10 @@ h2 {
     margin-top: 5%;
 }
 
+label {
+    color: lightgrey;
+}
+
 .add-project-button {
     margin: 0 40% 0 40%;
 }

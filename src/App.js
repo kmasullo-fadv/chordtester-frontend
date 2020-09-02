@@ -72,6 +72,8 @@ class App extends Component {
     this.setState({projects: userProjects})
   }
 
+
+
   render() {
     const value = {
       notes: this.state.notes,

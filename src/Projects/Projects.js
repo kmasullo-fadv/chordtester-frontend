@@ -5,6 +5,10 @@ import Context from '../Context';
 
 
 export default class Projects extends Component {
+    state = {
+        addingProject: false
+    }
+
     static contextType = Context;
 
     componentDidMount() {
@@ -14,11 +18,34 @@ export default class Projects extends Component {
             })
     }
 
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.setState({addingProject: false})
+    }
+
+    setAddProject = () => {
+        this.setState({addingProject: true})
+    }
+
+    renderAddButton = () => {
+        return (<button className="add-project-button" onClick={this.setAddProject}>Add Project</button>)
+    }
+
+    renderAddForm = () => {
+        return (
+                <form>
+                    <label htmlFor="new-project-title"> New Project Title:</label>
+                    <input type="text" name="new-project-title"/>
+                    <button onClick={this.handleSubmit}>Save</button>
+                </form>
+        )
+    }
+
     render() {
         return (
             <>
                 <h2>My Projects</h2>
-                <button className="add-project-button">Add Project</button>
+                {this.state.addingProject ? this.renderAddForm() : this.renderAddButton()}  
                 <section className="my-projects" id="my-projects">
                     {this.context.projects.map((project) => {
                         return (
