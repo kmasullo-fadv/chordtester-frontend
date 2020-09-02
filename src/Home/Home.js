@@ -6,7 +6,6 @@ import Context from '../Context';
 export default class Home extends Component {
     static contectType = Context;
 
-
     render() {
         return (
             <section className="welcome">
@@ -14,7 +13,7 @@ export default class Home extends Component {
                 <p>ChordTester is the perfect tool for testing chord voicings when you do not have
                 access to your instrument.
                 </p>
-                <button><Link to={'/hearchords'}>Try Now</Link></button>
+                <button><Link to={'/playchords'}>Try Now</Link></button>
             </section>
         )
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './HearChords.css';
+import './PlayChords.css';
 import Context from '../Context';
 import $ from 'jquery'
 

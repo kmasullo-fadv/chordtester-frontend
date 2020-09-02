@@ -4,14 +4,18 @@ h2 {
     margin-top: 5%;
 }
 
-.my-chords {
+.add-project-button {
+    margin: 0 40% 0 40%;
+}
+
+.my-projects {
     display: flex;
     justify-content: space-evenly;
     color: lightgrey;
     margin-top: 3%;
 }
 
-.song-div {
+.project-div {
     text-align: center;
     border-style: solid;
     border-color: lightslategrey;

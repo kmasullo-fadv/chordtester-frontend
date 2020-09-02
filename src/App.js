@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
-import HearChords from './HearChords/HearChords'
-import MyChords from './MyChords/MyChords'
+import PlayChords from './PlayChords/PlayChords'
+import Projects from './Projects/Projects'
 import Account from './Account/Account'
 import LoginPage from './LoginPage/LoginPage'
 import Context from './Context';
@@ -15,6 +15,7 @@ import PublicRoute from './Utils/PublicRoute';
 class App extends Component {
   state = {
     notes: [],
+    projects: [],
     hasError: false,
     isLoggedIn: false
   }
@@ -60,18 +61,28 @@ class App extends Component {
       throw (e)
     }
     chord.forEach((note) => note.start())
+  }
 
+  storeUserProjects = (projects) => {
+    let userProjects = projects.map(project => {
+      return {
+        title: project.title,
+        chords: project.chords}
+      })
+    this.setState({projects: userProjects})
   }
 
   render() {
     const value = {
       notes: this.state.notes,
+      projects: this.state.projects,
       addNote: this.addNote,
       deleteNote: this.deleteNote,
       buildChord: this.buildChord,
       clearNotes: this.clearNotes,
       logOut: this.setLogOut,
-      logIn: this.setLogIn
+      logIn: this.setLogIn,
+      storeUserProjects: this.storeUserProjects
     }
     return (
       <Context.Provider value={value}>
@@ -86,12 +97,12 @@ class App extends Component {
               component={Home}
             />
             <Route
-              path='/hearchords'
-              component={HearChords}
+              path='/playchords'
+              component={PlayChords}
             />
             <PrivateRoute
-              path='/mychords'
-              component={MyChords}
+              path='/projects'
+              component={Projects}
             />
             <PublicRoute
               path='/account'
