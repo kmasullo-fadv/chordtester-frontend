@@ -11,20 +11,25 @@ export default class Projects extends Component {
 
     static contextType = Context;
 
-    componentDidMount() {
-        ProjectsService.getAllProjects()
-        .then(res => {
-            this.context.storeUserProjects(res)
-            })
-    }
-
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
-        this.setState({addingProject: false})
+        const project = {
+            title: e.target['new-project-title'].value
+        };
+        ProjectsService.addProject(project)
+        .then(res => {
+            this.context.addUserProject(res)
+        })
+        .catch(error => {console.error({error})});
+        this.setNotAddingProject();
     }
 
     setAddProject = () => {
         this.setState({addingProject: true})
+    }
+
+    setNotAddingProject = () => {
+        this.setState({addingProject: false});
     }
 
     renderAddButton = () => {
@@ -33,10 +38,11 @@ export default class Projects extends Component {
 
     renderAddForm = () => {
         return (
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="new-project-title"> New Project Title:</label>
                     <input type="text" name="new-project-title"/>
-                    <button onClick={this.handleSubmit}>Save</button>
+                    <button type="submit" >Save</button>
+                    <button type="button" onClick={this.setNotAddingProject}>Cancel</button>
                 </form>
         )
     }

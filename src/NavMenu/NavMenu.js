@@ -17,7 +17,7 @@ export default class NavMenu extends Component {
             <ul id="menu">
                 <li><Link to={'/'} >Home</Link></li>
                 <li><Link to={'/playchords'}>Play Chords</Link></li>
-                <li><Link to={'/projects'}>Projects</Link></li>
+                {/* <li><Link to={'/projects'}>Projects</Link></li> */}
                 <li><Link to={'/login'}>Login</Link></li>
                 <li><Link to={'/account'}>Create Account</Link></li>
             </ul>
@@ -29,7 +29,7 @@ export default class NavMenu extends Component {
             <ul id="menu">
                 <li><Link to={'/'} >Home</Link></li>
                 <li><Link to={'/playchords'}>Play Chords</Link></li>
-                <li><Link to={'/projects'}>Projects</Link></li>
+                {/* <li><Link to={'/projects'}>Projects</Link></li> */}
                 <li><Link to='/' onClick={this.handleLogoutClick}>Log Out</Link></li>
             </ul>
         )

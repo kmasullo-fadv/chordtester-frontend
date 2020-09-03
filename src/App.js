@@ -4,12 +4,13 @@ import './App.css';
 import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
 import PlayChords from './PlayChords/PlayChords'
-import Projects from './Projects/Projects'
+//import Projects from './Projects/Projects'
 import Account from './Account/Account'
-import LoginPage from './LoginPage/LoginPage'
+import LoginPage from './LoginPage/LoginPage';
+import ProjectsService from './services/projects-service';
 import Context from './Context';
 import * as Tone from 'tone'
-import PrivateRoute from './Utils/PrivateRoute';
+//import PrivateRoute from './Utils/PrivateRoute';
 import PublicRoute from './Utils/PublicRoute';
 
 class App extends Component {
@@ -25,6 +26,13 @@ class App extends Component {
     return {hasError: true}
   }
 
+  componentDidMount() {
+    ProjectsService.getAllProjects()
+    .then(res => {
+        this.storeUserProjects(res)
+        })
+  }
+
   setLogIn = () => {
     this.setState({isLoggedIn: true})
   }
@@ -34,8 +42,7 @@ class App extends Component {
   }
 
   addNote = newNote => {
-    const notePath = `/Samples/${newNote}.mp3`
-    this.setState({ notes: [...this.state.notes, notePath] })
+    this.setState({ notes: [...this.state.notes, newNote] })
   }
 
   deleteNote = noteToDelete => {
@@ -51,7 +58,7 @@ class App extends Component {
   buildChord = async () => {
     let chord = [];
     for (let i = 0; i < this.state.notes.length; i++) {
-      chord[i] = new Tone.Player(process.env.PUBLIC_URL + `${this.state.notes[i]}`).toDestination();
+      chord[i] = new Tone.Player(process.env.PUBLIC_URL + `/Samples/${this.state.notes[i]}.mp3`).toDestination();
     }
     try {
       await Tone.loaded()
@@ -64,12 +71,11 @@ class App extends Component {
   }
 
   storeUserProjects = (projects) => {
-    let userProjects = projects.map(project => {
-      return {
-        title: project.title,
-        chords: project.chords}
-      })
-    this.setState({projects: userProjects})
+    this.setState({projects})
+  }
+
+  addUserProject = (project) => {
+    this.setState({projects: [...this.state.projects, project]})
   }
 
 
@@ -84,7 +90,8 @@ class App extends Component {
       clearNotes: this.clearNotes,
       logOut: this.setLogOut,
       logIn: this.setLogIn,
-      storeUserProjects: this.storeUserProjects
+      storeUserProjects: this.storeUserProjects,
+      addUserProject: this.addUserProject
     }
     return (
       <Context.Provider value={value}>
@@ -102,10 +109,10 @@ class App extends Component {
               path='/playchords'
               component={PlayChords}
             />
-            <PrivateRoute
+            {/* <PrivateRoute
               path='/projects'
               component={Projects}
-            />
+            /> */}
             <PublicRoute
               path='/account'
               component={Account}
