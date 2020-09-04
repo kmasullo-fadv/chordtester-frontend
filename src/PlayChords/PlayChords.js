@@ -50,12 +50,10 @@ export default class HearChords extends Component {
         )
     }
     
-
-
     renderChordSelect = (i) => {
-        return(<option key={`chord${i}`}>{this.state.currentChords[i].name}</option>)
+        const currentChord = this.state.currentChords[i];
+        return(<option key={`chord${i}`} value={currentChord.notes}>{currentChord.name}</option>)
     }
-
 
     handleToggleNote = e => {
         const note = e.target.name
@@ -90,7 +88,15 @@ export default class HearChords extends Component {
 
     handleViewChord = e => {
         e.preventDefault();
-        
+        this.context.clearNotes();
+        const notes1 = e.target.value;
+        const notes2 = notes1.slice(1, notes1.length-1)
+        let notesArray = notes2.split(',')
+        notesArray = notesArray.map(note => { return note.slice(1, note.length-1)})
+        //NOT FUNCTIONAL YET
+        for(let i=0; i<notesArray.length; i++){
+            $('.guitar-neck').each(() => {$(`${notesArray[i]}`).attr('checked', 'true')})
+        }
     }
 
     renderButtons = () => {
@@ -130,14 +136,17 @@ export default class HearChords extends Component {
                         </select>
                         <br/><br/>
                         Chords: <select name="chord" id="chord" onChange={this.handleViewChord}>
+                            <option value="" defaultValue="selected">Select chord</option>
                             {this.state.currentChords 
                             ? this.state.currentChords.map(chord => {return this.renderChordSelect(this.state.currentChords.indexOf(chord))}) 
                             : <option value="">Please select project first</option>}
                         </select>
                     </form>
                 </div>
-                <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
-                <button onClick={this.handleClearNotes}>Clear Fretboard</button>
+                <div>
+                    <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
+                    <button onClick={this.handleClearNotes}>Clear Fretboard</button>
+                </div>
             </>)};
     };
 
@@ -148,7 +157,7 @@ export default class HearChords extends Component {
                 <section className="guitar-neck" >
 
                     <div className="string" id="1">
-                        <div className="fret" ><label htmlFor="he0" /><input type="checkbox" name="he0" onChange={this.handleToggleNote} /></div>
+                        <div className="fret" ><label htmlFor="he0" /><input id="he0" type="checkbox" name="he0" onChange={this.handleToggleNote} /></div>
                         <div className="fret"><label htmlFor="he1" /><input type="checkbox" name="he1" onChange={this.handleToggleNote} /></div>
                         <div className="fret"><label htmlFor="he2" /><input type="checkbox" name="he2" onChange={this.handleToggleNote} /></div>
                         <div className="fret inlay"><label htmlFor="he3" /><input type="checkbox" name="he3" onChange={this.handleToggleNote} /></div>
