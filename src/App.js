@@ -17,6 +17,7 @@ class App extends Component {
   state = {
     notes: [],
     projects: [],
+    chords: [],
     hasError: false,
     isLoggedIn: false
   }
@@ -27,10 +28,20 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.setState({chords: []});
     ProjectsService.getAllProjects()
     .then(res => {
-        this.storeUserProjects(res)
-        })
+      res.forEach(project => {
+        ProjectsService.getProjectById(project.id)
+          .then(res => {
+            this.setState({chords: [...this.state.chords, ...res]})
+          })
+      })
+    });
+    ProjectsService.getAllProjects()
+    .then(res => {
+      this.storeUserProjects(res)
+    })
   }
 
   setLogIn = () => {
@@ -46,8 +57,7 @@ class App extends Component {
   }
 
   deleteNote = noteToDelete => {
-    const notePath = `/Samples/${noteToDelete}.mp3`
-    let currentNotes = this.state.notes.filter(note => note !== notePath)
+    let currentNotes = this.state.notes.filter(note => note !== noteToDelete)
     this.setState({ notes: [...currentNotes] })
   }
 
@@ -84,6 +94,7 @@ class App extends Component {
     const value = {
       notes: this.state.notes,
       projects: this.state.projects,
+      chords: this.state.chords,
       addNote: this.addNote,
       deleteNote: this.deleteNote,
       buildChord: this.buildChord,

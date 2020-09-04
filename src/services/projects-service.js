@@ -47,6 +47,18 @@ const ProjectsService = {
             ? res.json().then(e => e.Promise.reject(e))
             : res.json()
         )
+    },
+    getProjectById(projectId) {
+        return fetch(`${config.API_ENDPOINT}/projects/${projectId}`, {
+            headers: {
+                Authorization: `Bearer ${TokenService.getAuthToken()}`
+            }
+        })
+        .then(res =>
+            (!res.ok)
+            ? res.json().then(e => e.Promise.reject(e))
+            : res.json()
+        )
     }
 }
 

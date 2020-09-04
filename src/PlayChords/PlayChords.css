@@ -1,11 +1,28 @@
-.playButton {
-    margin-top: 100px;
-    margin-left: 500px;
+/* ******** FORMS ******** */
+h3 {
+    color: lightgrey;
+    margin-top: 40px;
 }
 
 #save-form {
     margin-top: 10%;
 }
+
+form {
+    width: 200px;
+    color: lightgrey;
+}
+
+
+.playButtons {
+    margin-top: 100px;
+}
+
+
+
+
+
+/* ******* FRETBORAD ******** */
 
 .guitar-neck {
     display: flex;
@@ -41,7 +58,7 @@
     align-items: center;
     position: relative;
 }
-input {
+.string input {
     width: 40px;
     height: 32px;
     cursor: pointer;

@@ -5,14 +5,16 @@ import $ from 'jquery';
 import TokenService from '../services/token-service';
 import ProjectsService from '../services/projects-service';
 
+
 export default class HearChords extends Component {
     state = {
-        addingProject: false
+        addingProject: false,
+        currentChords: null
     }
 
     static contextType = Context;
 
-    handleSubmit = e => {
+    handleSubmitProject = e => {
         e.preventDefault();
         const project = {
             title: e.target['new-project-title'].value
@@ -39,7 +41,7 @@ export default class HearChords extends Component {
 
     renderAddForm = () => {
         return (
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmitProject}>
                     <label htmlFor="new-project-title"> New Project Title:</label>
                     <input type="text" name="new-project-title"/>
                     <button type="submit" >Save</button>
@@ -47,7 +49,12 @@ export default class HearChords extends Component {
                 </form>
         )
     }
+    
 
+
+    renderChordSelect = (i) => {
+        return(<option key={`chord${i}`}>{this.state.currentChords[i].name}</option>)
+    }
 
 
     handleToggleNote = e => {
@@ -75,54 +82,68 @@ export default class HearChords extends Component {
         this.handleClearNotes();
     }
 
+    handleGetProject = e => {
+        e.preventDefault();
+        const currentProject = this.context.chords.filter(chord => {return chord.project_id === parseInt(e.target.value)})
+        this.setState({currentChords: [...currentProject]})
+    }
+
+    handleViewChord = e => {
+        e.preventDefault();
+        
+    }
 
     renderButtons = () => {
         if (!TokenService.hasAuthToken()) {
             return (<>
-                <button className='playButton' onClick={this.context.buildChord}>PlayChord</button>
-                <button onClick={this.handleClearNotes}>Clear Fretboard</button>
+                <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
+                <button className='playButtons' onClick={this.handleClearNotes}>Clear Fretboard</button>
             </>)
         } else {
             return (<>
-                
-                <form id="save-form" onSubmit={this.handleSaveToProject}>
-                    <select name="select-menu">
-                        <option>Save to Project:</option>
-                        {this.context.projects.map(project => {
-                            return (<option value={project.id} key={`option ${project.title}`}>
-                                {project.title}
-                            </option>)
-                        })}
-                    </select>
-                    <label htmlFor="chord-name">Chord Name:</label>
-                    <input name="chord-name" />
-                    <button type="submit">Save</button>
-                </form>
-                {this.state.addingProject ? this.renderAddForm() : this.renderAddButton()}
-                <h3>View Saved Chords</h3>
-                <form name="project-chords-form" id="project-chords-form" action="/action_page.php">
-                    Projects: <select name="project" id="project">
-                        <option value="" defaultValue="selected">Select project</option>
-                        {this.context.projects.map(project => {
-                            return (<option value={project.id} key={`option ${project.title}`}>
-                                {project.title}
-                            </option>)
-                        })}
-                    </select>
-                    <br/><br/>
-                    Chords: <select name="chord" id="chord">
-                        <option value="" defaultValue="selected">Please select project first</option>
-                    </select>
-                </form>
-                <button className='playButton' onClick={this.context.buildChord}>PlayChord</button>
+                <div>
+                    <form id="save-form" className="select" onSubmit={this.handleSaveToProject}>
+                        <select name="select-menu">
+                            <option>Save to Project:</option>
+                            {this.context.projects.map(project => {
+                                return (<option value={project.id} key={`option ${project.title}`}>
+                                    {project.title}
+                                </option>)
+                            })}
+                        </select><br/>
+                        <label htmlFor="chord-name">Chord Name:</label>
+                        <input name="chord-name" />
+                        <button type="submit">Save</button>
+                    </form>
+                    {this.state.addingProject ? this.renderAddForm() : this.renderAddButton()}
+                </div>
+                <div>
+                    <h3>View Saved Chords</h3>
+                    <form className="select" name="project-chords-form" id="project-chords-form" action="/action_page.php">
+                        Projects: <select name="project" id="project" onChange={this.handleGetProject}>
+                            <option value="" defaultValue="selected">Select project</option>
+                            {this.context.projects.map(project => {
+                                return (<option value={project.id} key={`option ${project.title}`}>
+                                    {project.title}
+                                </option>)
+                            })}
+                        </select>
+                        <br/><br/>
+                        Chords: <select name="chord" id="chord" onChange={this.handleViewChord}>
+                            {this.state.currentChords 
+                            ? this.state.currentChords.map(chord => {return this.renderChordSelect(this.state.currentChords.indexOf(chord))}) 
+                            : <option value="">Please select project first</option>}
+                        </select>
+                    </form>
+                </div>
+                <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
                 <button onClick={this.handleClearNotes}>Clear Fretboard</button>
-            </>)}
-    }
+            </>)};
+    };
 
     render() {
         return (
             <>
-                
                 {this.renderButtons()}
                 <section className="guitar-neck" >
 
