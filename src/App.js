@@ -31,6 +31,7 @@ class App extends Component {
     this.setState({chords: []});
     ProjectsService.getAllProjects()
     .then(res => {
+      this.storeUserProjects(res)
       res.forEach(project => {
         ProjectsService.getProjectById(project.id)
           .then(res => {
@@ -38,10 +39,6 @@ class App extends Component {
           })
       })
     });
-    ProjectsService.getAllProjects()
-    .then(res => {
-      this.storeUserProjects(res)
-    })
   }
 
   setLogIn = () => {
@@ -61,8 +58,8 @@ class App extends Component {
     this.setState({ notes: [...currentNotes] })
   }
 
-  clearNotes = () => {
-    this.setState({ notes: [] })
+  setNotes = (notes=[]) => {
+    this.setState({ notes })
   }
 
   buildChord = async () => {
@@ -98,7 +95,7 @@ class App extends Component {
       addNote: this.addNote,
       deleteNote: this.deleteNote,
       buildChord: this.buildChord,
-      clearNotes: this.clearNotes,
+      setNotes: this.setNotes,
       logOut: this.setLogOut,
       logIn: this.setLogIn,
       storeUserProjects: this.storeUserProjects,
