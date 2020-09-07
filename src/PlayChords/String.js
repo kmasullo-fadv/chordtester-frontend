@@ -22,33 +22,36 @@ export default class String extends Component {
             for(let i=0; i<16; i++){
                 if(i===3 || i===5 || i===7 || i===9){
                     stringArray.push(
-                        <div className="fret inlay" >
+                        <div className="fret inlay" key={`${stringName}${i}`} >
                             <label htmlFor={`${stringName}${i}`} />
                             <input type="checkbox"
                                 checked={this.context.notes.includes(`${stringName}${i}`)}
                                 onChange={this.handleToggleNote}
-                                name={`${stringName}${i}`} />
+                                name={`${stringName}${i}`}
+                                />
                         </div>
                     )
                 } else if(i===12){
                     stringArray.push(
-                        <div className="fret">
+                        <div className="fret" key={`${stringName}${i}`} >
                         <div className="double-inlay"></div>
                         <label htmlFor="he12" />
                         <input type="checkbox"
                             checked={this.context.notes.includes('he12')}
                             onChange={this.handleToggleNote}
-                            name="he12" />
+                            name="he12"
+                            />
                         </div>
                     )
                 }else {
                     stringArray.push(
-                        <div className="fret" >
+                        <div className="fret" key={`${stringName}${i}`} >
                             <label htmlFor={`${stringName}${i}`} />
                             <input type="checkbox"
                                 checked={this.context.notes.includes(`${stringName}${i}`)}
                                 onChange={this.handleToggleNote}
-                                name={`${stringName}${i}`} />
+                                name={`${stringName}${i}`}
+                                />
                         </div>
                     )
                 }
@@ -56,12 +59,13 @@ export default class String extends Component {
         } else {
             for(let i=0; i<16; i++){
                 stringArray.push(
-                    <div className="fret" >
+                    <div className="fret" key={`${stringName}${i}`} >
                         <label htmlFor={`${stringName}${i}`} />
                         <input type="checkbox"
                             checked={this.context.notes.includes(`${stringName}${i}`)}
                             onChange={this.handleToggleNote}
-                            name={`${stringName}${i}`} />
+                            name={`${stringName}${i}`}
+                            />
                     </div>
                 )
             }

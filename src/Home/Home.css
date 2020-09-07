@@ -1,12 +1,6 @@
-html {width: 100%;}
-body {
-    background-color: rgb(26, 26, 26);
+html {
+    background-image: linear-gradient(to top left, rgb(0, 0, 0), rgb(31, 31, 31));
     font-family: sans-serif;
-    width: 100%;
-}
-h1 {
-    text-align: center;
-    color: lightgrey;
 }
 
 .welcome {

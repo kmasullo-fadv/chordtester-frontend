@@ -1,0 +1,28 @@
+nav a {text-decoration: none;}
+nav a:link{color: lightgrey;}
+nav a:visited{color: lightgrey;}
+nav a:hover{color: rgb(255, 255, 255);}
+nav a:active{color: blanchedalmond;}
+
+#menu a {
+    text-decoration: none;
+}
+#menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12%;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #menu {
+        padding: 0 16% 0 0;
+    }
+}
+

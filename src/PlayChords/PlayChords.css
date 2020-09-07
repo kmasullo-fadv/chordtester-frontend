@@ -1,22 +1,73 @@
+html, body, main {
+    width: 100%;
+    min-width: 950px;
+}
+
 /* ******** FORMS ******** */
-h3 {
-    color: lightgrey;
-    margin-top: 40px;
-}
-
-#save-form {
-    margin-top: 10%;
-}
-
 form {
     width: 200px;
     color: lightgrey;
 }
 
-
-.playButtons {
-    margin-top: 100px;
+.app-controls {
+    background-image: linear-gradient(rgb(28, 28, 28),
+        rgb(24, 24, 24), rgb(23, 23, 23));
+    box-shadow: 50px 10px 10px 1px rgba(0, 0, 0, 0.064),
+        10px 17px 50px 0 rgba(255, 255, 255, 0.071);
+    width: 100%;
 }
+
+.app-controls button,
+.app-controls select,
+.app-controls input,
+.playButtons-loggedOut button {
+    background: rgb(63, 63, 63);
+    color: lightgrey;
+    padding: 7px 0;
+    margin: 5px;
+    width: 200px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: rgb(31, 31, 31);
+    border-radius: 0;
+}
+
+.playButtons-big button,
+.playButtons-small button,
+.playButtons-loggedOut button {
+    height: 50px;
+    font-weight: bolder;
+    font-size: 15px;
+    margin-top: 25px;
+    transition-duration: 0.4s;
+}
+.playButtons-small {
+    display: none;
+}
+  
+button:hover {
+    background-color: lightgrey;
+    color: rgb(33, 33, 33);
+    box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.064), 0 17px 50px 0 rgba(255, 255, 255, 0.071);
+  }
+
+
+.playButtons-loggedOut {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.menu-whole {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 70px;
+}
+
+.menu-section {
+    flex-direction: row;
+}
+
+
+
 
 
 
@@ -29,8 +80,8 @@ form {
     flex-direction: column;
     height: 300px;
     width: 100%;
-    min-width: 1500px;
-    background-color: tan;
+    min-width: 950px;
+    background: tan url(../img/wood-pattern.png);
     margin-top: 8%;
 }
 .string {
@@ -44,7 +95,7 @@ form {
     width: 100%;
     height: 10px;
     background: linear-gradient(rgb(157, 157, 157), lightgrey);
-    box-shadow: 76px 3px 10px rgb(155, 112, 55);
+    box-shadow: 1px 3px 10px rgb(155, 112, 55);
     z-index: 1;
     position: absolute;
     top: 22px;
@@ -62,7 +113,7 @@ form {
     width: 40px;
     height: 32px;
     cursor: pointer;
-    /* opacity: 0; */
+    opacity: 60%;
     z-index: 2;
 }
 
@@ -74,24 +125,7 @@ form {
     flex-shrink: 0;
     border-image: linear-gradient(to left, #bbb, #fff, #fff) 1 100%;
 }
-.fret:before {
-    content: '';
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    line-height: 33px;
-    text-align: center;
-    background: rgb(84, 84, 255);
-    z-index: 2;
-    opacity: 0;
-}
-/* label {
-    width: 33px;
-    height: 33px;
-    border-radius: 50%;
-    line-height: 33px;
-    background: rgb(84, 84, 255);
-} */
+
 .inlay:after, .double-inlay:before, .double-inlay:after {
     content: '';
     position: absolute;
@@ -106,21 +140,40 @@ form {
 }
 .double-inlay:before {
     top: 58px;
-    transform: translate(-140%, 50%);
+    transform: translate(70%, 50%);
 }
 .double-inlay:after {
     top: 208px;
-    transform: translate(-140%, 50%);
+    transform: translate(70%, 50%);
 }
 
-/* .fretCheck {
-    opacity: 0;
-    display: flex;
-    flex: 1;
-    position: relative;
-} */
 
-/* .guitar-neck {
-    transform: rotate(90deg);
-    margin-top: 50%;
-} */
+@media screen and (max-width: 600px) {
+  
+    html, body, main {
+        min-height: 2000px;
+        min-width: 300px;
+    }
+    .guitar-neck {
+        transform: rotate(90deg) translate(0, 100%);
+        margin-top: 400px;
+        margin-right: 500px;
+    }
+    .string input {
+        transform: rotate(-90deg);
+    }
+
+    .menu-whole {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .playButtons-big {
+        display: none;
+    }
+
+    .playButtons-small {
+        display: flex;
+        justify-content: space-between;
+    }
+}

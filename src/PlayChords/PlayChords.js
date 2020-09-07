@@ -98,13 +98,13 @@ export default class HearChords extends Component {
 
     renderButtons = () => {
         if (!TokenService.hasAuthToken()) {
-            return (<>
-                <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
-                <button className='playButtons' onClick={this.handlesetNotes}>Clear Fretboard</button>
-            </>)
+            return (<div className='playButtons-loggedOut'>
+                <button onClick={this.context.buildChord}>Play</button>
+                <button onClick={this.handlesetNotes}>Clear</button>
+            </div>)
         } else {
-            return (<>
-                <div>
+            return (<div className="app-controls menu-whole">
+                <div className="save-project menu-section">
                     <form id="save-form" className="select" onSubmit={this.handleSaveToProject}>
                         <select name="select-menu">
                             <option>Save to Project:</option>
@@ -120,10 +120,13 @@ export default class HearChords extends Component {
                     </form>
                     {this.state.addingProject ? this.renderAddForm() : this.renderAddButton()}
                 </div>
-                <div>
-                    <h3>View Saved Chords</h3>
+                <div className='playButtons-big'>
+                    <button onClick={this.context.buildChord}>Play</button><br/>
+                    <button onClick={this.handlesetNotes}>Clear</button>
+                </div>
+                <div className="save-chords menu-section">
                     <form className="select" name="project-chords-form" id="project-chords-form" action="/action_page.php">
-                        Projects: <select name="project" id="project" onChange={this.handleGetProject}>
+                        View Project: <select name="project" id="project" onChange={this.handleGetProject}>
                             <option value="" defaultValue="selected">Select project</option>
                             {this.context.projects.map(project => {
                                 return (<option value={project.id} key={`option ${project.title}`}>
@@ -140,11 +143,11 @@ export default class HearChords extends Component {
                         </select>
                     </form>
                 </div>
-                <div>
-                    <button className='playButtons' onClick={this.context.buildChord}>PlayChord</button>
-                    <button onClick={this.handlesetNotes}>Clear Fretboard</button>
+                <div className='playButtons-small'>
+                    <button onClick={this.context.buildChord}>Play</button>
+                    <button onClick={this.handlesetNotes}>Clear</button>
                 </div>
-            </>)};
+            </div>)};
     };
 
     render() {

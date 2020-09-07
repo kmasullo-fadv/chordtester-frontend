@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Login from '../Account/Login';
+import Login from './Account/Login';
+import Account from './Account/Account'
 import Context from '../Context';
 
 export default class LoginPage extends Component {
@@ -15,17 +16,16 @@ export default class LoginPage extends Component {
     handleLoginSuccess = () => {
         const { location, history } = this.props;
         const destination = (location.state || {}).from || '/'
-        console.log(destination)
         history.push(destination)
         this.context.logIn()
     }
 
     render(){
         return(
-            <>
-            <h2>Log Into Your Account</h2>
+            <div className="login-page-whole">
             <Login onLoginSuccess={this.handleLoginSuccess}/>
-            </>
+            <Account />
+            </div>
         )
     }
 }

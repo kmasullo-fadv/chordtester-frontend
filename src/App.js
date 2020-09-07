@@ -4,10 +4,9 @@ import './App.css';
 import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
 import PlayChords from './PlayChords/PlayChords'
-//import Projects from './Projects/Projects'
-import Account from './Account/Account'
 import LoginPage from './LoginPage/LoginPage';
 import ProjectsService from './services/projects-service';
+import TokenService from './services/token-service'
 import Context from './Context';
 import * as Tone from 'tone'
 //import PrivateRoute from './Utils/PrivateRoute';
@@ -29,16 +28,18 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({chords: []});
-    ProjectsService.getAllProjects()
-    .then(res => {
-      this.storeUserProjects(res)
-      res.forEach(project => {
-        ProjectsService.getProjectById(project.id)
-          .then(res => {
-            this.setState({chords: [...this.state.chords, ...res]})
-          })
-      })
-    });
+    if(TokenService.hasAuthToken()){
+      ProjectsService.getAllProjects()
+      .then(res => {
+        this.storeUserProjects(res)
+        res.forEach(project => {
+          ProjectsService.getProjectById(project.id)
+            .then(res => {
+              this.setState({chords: [...this.state.chords, ...res]})
+            })
+        })
+      });
+    }
   }
 
   setLogIn = () => {
@@ -103,7 +104,6 @@ class App extends Component {
     }
     return (
       <Context.Provider value={value}>
-        <header><h1>ChordTester</h1></header>
         <main>
           {this.state.hasError && <p>There was an error!</p>}
           <NavMenu loggedin={this.state.isLoggedIn}/><br />
@@ -111,23 +111,15 @@ class App extends Component {
             <Route
               exact
               path='/'
-              component={Home}
-            />
-            <Route
-              path='/playchords'
               component={PlayChords}
-            />
-            {/* <PrivateRoute
-              path='/projects'
-              component={Projects}
-            /> */}
-            <PublicRoute
-              path='/account'
-              component={Account}
             />
             <PublicRoute
               path='/login'
               component={LoginPage}
+            />
+            <Route
+              path='/about'
+              component={Home}
             />
           </Switch>
         </main>
