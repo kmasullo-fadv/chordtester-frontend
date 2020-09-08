@@ -8,7 +8,7 @@ import String from './String';
 
 
 
-export default class HearChords extends Component {
+export default class PlayChords extends Component {
     state = {
         addingProject: false,
         currentChords: [],

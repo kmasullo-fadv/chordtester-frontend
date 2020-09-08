@@ -13,7 +13,7 @@ export default class Home extends Component {
                 <p>ChordTester is the perfect tool for testing chord voicings when you do not have
                 access to your instrument.
                 </p>
-                <button><Link to={'/playchords'}>Try Now</Link></button>
+                <button><Link to={'/'}>Try Now</Link></button>
             </section>
         )
     }
