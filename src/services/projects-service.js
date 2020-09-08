@@ -14,6 +14,30 @@ const ProjectsService = {
             : res.json()
         )
     },
+    getProjectById(projectId) {
+        return fetch(`${config.API_ENDPOINT}/projects/${projectId}`, {
+            headers: {
+                Authorization: `Bearer ${TokenService.getAuthToken()}`
+            }
+        })
+        .then(res =>
+            (!res.ok)
+            ? res.json().then(e => e.Promise.reject(e))
+            : res.json()
+        )
+    },
+    getChordById(id) {
+        return fetch(`${config.API_ENDPOINT}/chords/${id}`, {
+            headers: {
+                Authorization: `Bearer ${TokenService.getAuthToken()}`
+            }
+        })
+        .then(res => {
+            (!res.ok)
+            ? res.json().then(e => e.Promise.reject(e))
+            : res.json()
+        })
+    },
     addProject(newProject) {
         return fetch(`${config.API_ENDPOINT}/projects`, {
             method: 'POST',
@@ -48,17 +72,35 @@ const ProjectsService = {
             : res.json()
         )
     },
-    getProjectById(projectId) {
+    deleteProject(projectId) {
         return fetch(`${config.API_ENDPOINT}/projects/${projectId}`, {
+            method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${TokenService.getAuthToken()}`
             }
         })
-        .then(res =>
+        .then(res => 
             (!res.ok)
             ? res.json().then(e => e.Promise.reject(e))
             : res.json()
         )
+    },
+    deleteChord(id) {
+        return fetch(`${config.API_ENDPOINT}/chords/${id}`, {
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => 
+            (!res.ok)
+            ? res.json().then(e => e.Promise.reject(e))
+            : null
+        )
+        .catch(error => {
+            console.error({error})
+        })
     }
 }
 

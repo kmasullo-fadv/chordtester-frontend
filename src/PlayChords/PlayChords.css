@@ -43,6 +43,10 @@ form {
 .playButtons-small {
     display: none;
 }
+
+#project-chords-form {
+    margin-top: 7px;
+}
   
 button:hover {
     background-color: lightgrey;
@@ -81,7 +85,7 @@ button:hover {
     height: 300px;
     width: 100%;
     min-width: 950px;
-    background: tan url(../img/wood-pattern.png);
+    background: rgb(215, 166, 98) url(../img/wood-pattern.png);
     margin-top: 8%;
 }
 .string {
@@ -95,7 +99,7 @@ button:hover {
     width: 100%;
     height: 10px;
     background: linear-gradient(rgb(157, 157, 157), lightgrey);
-    box-shadow: 1px 3px 10px rgb(155, 112, 55);
+    box-shadow: 1px 0 10px rgb(74, 74, 74);
     z-index: 1;
     position: absolute;
     top: 22px;
@@ -113,8 +117,8 @@ button:hover {
     width: 40px;
     height: 32px;
     cursor: pointer;
-    opacity: 60%;
     z-index: 2;
+    opacity: 0.65;
 }
 
 .fret:first-child {
@@ -151,7 +155,7 @@ button:hover {
 @media screen and (max-width: 600px) {
   
     html, body, main {
-        min-height: 2000px;
+        min-height: 1600px;
         min-width: 300px;
     }
     .guitar-neck {
@@ -166,6 +170,22 @@ button:hover {
     .menu-whole {
         display: flex;
         flex-direction: column;
+        margin: auto;
+    }
+
+    form {
+        width: 90%;
+    }
+
+    .app-controls button,
+    .app-controls select,
+    .app-controls input,
+    .playButtons-loggedOut button {
+        width: 90%;
+    }
+
+    .menu-section .add-project-button {
+        width: 81%;
     }
 
     .playButtons-big {
@@ -175,5 +195,7 @@ button:hover {
     .playButtons-small {
         display: flex;
         justify-content: space-between;
+        width: 90%;
+        margin: auto;
     }
 }

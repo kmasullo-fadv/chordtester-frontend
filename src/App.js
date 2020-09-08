@@ -86,6 +86,11 @@ class App extends Component {
     this.setState({projects: [...this.state.projects, project]})
   }
 
+  deleteUserProject = (id) => {
+    let currentProjects = this.state.projects.filter(project => project.id !== id)
+    this.setState({projects: [...currentProjects]})
+  }
+
 
 
   render() {

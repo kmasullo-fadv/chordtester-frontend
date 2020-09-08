@@ -20,7 +20,7 @@ export default class String extends Component {
         let stringArray = []
         if(stringName === 'he'){
             for(let i=0; i<16; i++){
-                if(i===3 || i===5 || i===7 || i===9){
+                if(i===3 || i===5 || i===7 || i===9 || i===15){
                     stringArray.push(
                         <div className="fret inlay" key={`${stringName}${i}`} >
                             <label htmlFor={`${stringName}${i}`} />
