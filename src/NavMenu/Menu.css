@@ -1,11 +1,15 @@
 nav a {text-decoration: none;}
 nav a:link{color: lightgrey;}
 nav a:visited{color: lightgrey;}
-nav a:hover{color: rgb(255, 255, 255);}
+nav a:hover{
+    color: rgb(255, 255, 255,);
+    text-shadow: 0px 0px 7px rgb(164, 164, 164);
+}
 nav a:active{color: blanchedalmond;}
 
 #menu a {
     text-decoration: none;
+    transition-duration: 0.4s;
 }
 #menu {
     display: flex;

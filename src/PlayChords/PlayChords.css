@@ -156,7 +156,6 @@ button:hover {
 @media screen and (max-width: 600px) {
   
     html, body, main {
-        min-height: 1600px;
         min-width: 300px;
         margin: auto;
     }
@@ -168,7 +167,6 @@ button:hover {
     .guitar-neck {
         transform: rotate(90deg) translate(0, 100%);
         margin-top: 400px;
-        /* margin-right: 500px; */
     }
 
     .string input {

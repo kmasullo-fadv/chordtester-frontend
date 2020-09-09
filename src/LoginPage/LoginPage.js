@@ -24,7 +24,7 @@ export default class LoginPage extends Component {
         return(
             <div className="login-page-whole">
             <Login onLoginSuccess={this.handleLoginSuccess}/>
-            <Account />
+            <Account onLoginSuccess={this.handleLoginSuccess}/>
             </div>
         )
     }

@@ -13,6 +13,12 @@ h2 {
     background-color: rgb(43, 43, 43);
 }
 
+.info-section p  {
+    margin: auto;
+    padding: 10px;
+    width: 400px;
+}
+
 .info-section input,
 .info-section button {
     width: 386px;

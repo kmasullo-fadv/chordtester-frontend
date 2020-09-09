@@ -17,7 +17,7 @@ export default class Account extends Component {
         const { username, password } = e.target;
 
         AuthApiService.postLogin({
-            username: username.value,
+            username: username.value.toLowerCase(),
             password: password.value
         })
         .then(res => {
@@ -41,7 +41,7 @@ export default class Account extends Component {
                     <label htmlFor="username">Username:</label>
                     <input type="text" id="username" /><br />
                     <label htmlFor="password">Password:</label>
-                    <input type="text" id="password" /><br />
+                    <input type="password" id="password" /><br />
                     <button type="submit">Submit</button>
                 </form>
             </section>
