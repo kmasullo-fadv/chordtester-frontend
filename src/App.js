@@ -5,6 +5,7 @@ import NavMenu from './NavMenu/NavMenu'
 import Home from './Home/Home'
 import PlayChords from './PlayChords/PlayChords'
 import LoginPage from './LoginPage/LoginPage';
+import NotFound from './NotFound/NotFound';
 import ProjectsService from './services/projects-service';
 import TokenService from './services/token-service'
 import Context from './Context';
@@ -27,6 +28,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.componentMountProcess();
+  }
+
+  componentMountProcess = () => {
     this.setState({chords: []});
     if(TokenService.hasAuthToken()){
       ProjectsService.getAllProjects()
@@ -105,7 +110,8 @@ class App extends Component {
       logOut: this.setLogOut,
       logIn: this.setLogIn,
       storeUserProjects: this.storeUserProjects,
-      addUserProject: this.addUserProject
+      addUserProject: this.addUserProject,
+      componentMountProcess: this.componentMountProcess
     }
     return (
       <Context.Provider value={value}>
@@ -125,6 +131,10 @@ class App extends Component {
             <Route
               path='/about'
               component={Home}
+            />
+            <Route 
+              path='/:anythingwrong'
+              component={NotFound}
             />
           </Switch>
         </main>

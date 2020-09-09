@@ -18,6 +18,7 @@ export default class PlayChords extends Component {
 
     static contextType = Context;
 
+
     handleSubmitProject = e => {
         e.preventDefault();
         const project = {
@@ -45,12 +46,14 @@ export default class PlayChords extends Component {
 
     renderAddForm = () => {
         return (
+            <div className="add-project-form">
                 <form onSubmit={this.handleSubmitProject}>
                     <label htmlFor="new-project-title"> New Project Title:</label>
                     <input type="text" name="new-project-title"/>
                     <button type="submit" >Save</button>
                     <button type="button" onClick={this.setNotAddingProject}>Cancel</button>
                 </form>
+            </div>
         )
     }
     

@@ -1,6 +1,7 @@
 html, body, main {
     width: 100%;
     min-width: 950px;
+    margin: auto;
 }
 
 /* ******** FORMS ******** */
@@ -157,14 +158,28 @@ button:hover {
     html, body, main {
         min-height: 1600px;
         min-width: 300px;
+        margin: auto;
     }
+
+    h1 {
+        margin-left: 10%;
+    }
+    
     .guitar-neck {
         transform: rotate(90deg) translate(0, 100%);
         margin-top: 400px;
-        margin-right: 500px;
+        /* margin-right: 500px; */
     }
+
     .string input {
         transform: rotate(-90deg);
+    }
+
+    .app-controls button,
+    .app-controls select,
+    .app-controls input,
+    .playButtons-loggedOut button {
+        width: 100%;
     }
 
     .menu-whole {
@@ -176,16 +191,25 @@ button:hover {
     form {
         width: 90%;
     }
+    
+    .menu-section .add-project-button,
+    .menu-section .add-project-form {
+        margin-left: 6%;
+    }
+    
+    .menu-whole .add-project-form {
+        width: 100%;
+        padding-top: 20px;
+    }
 
-    .app-controls button,
-    .app-controls select,
-    .app-controls input,
-    .playButtons-loggedOut button {
-        width: 90%;
+    #project-chords-form,
+    #save-form {
+        margin: auto;
+        padding-top: 20px;
     }
 
     .menu-section .add-project-button {
-        width: 81%;
+        width: 90%;
     }
 
     .playButtons-big {
@@ -196,6 +220,6 @@ button:hover {
         display: flex;
         justify-content: space-between;
         width: 90%;
-        margin: auto;
+        margin-left: 6%;
     }
 }
