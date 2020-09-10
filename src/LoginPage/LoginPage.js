@@ -18,6 +18,7 @@ export default class LoginPage extends Component {
         const destination = (location.state || {}).from || '/'
         history.push(destination)
         this.context.logIn()
+        this.context.refresh()
     }
 
     render(){

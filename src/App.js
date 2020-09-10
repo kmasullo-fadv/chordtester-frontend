@@ -48,7 +48,7 @@ class App extends Component {
 
 
   setLogIn = () => {
-    this.setState({isLoggedIn: true})
+    this.setState({isLoggedIn: true});
   };
 
   setLogOut = () => {
