@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import NavMenu from './NavMenu/NavMenu';
-import Home from './Home/Home';
+import About from './About/About';
 import PlayChords from './PlayChords/PlayChords';
 import LoginPage from './LoginPage/LoginPage';
 import NotFound from './NotFound/NotFound';
@@ -131,7 +131,7 @@ class App extends Component {
             />
             <Route
               path='/about'
-              component={Home}
+              component={About}
             />
             <Route 
               path='/:anythingwrong'

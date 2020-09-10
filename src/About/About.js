@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import './Home.css';
+import './About.css';
 import Context from '../Context';
 
-export default class Home extends Component {
+export default class About extends Component {
     static contectType = Context;
 
     render() {
