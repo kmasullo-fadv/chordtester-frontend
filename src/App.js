@@ -99,7 +99,7 @@ class App extends Component {
 
 
   render() {
-    if(this.state.loading && TokenService.hasAuthToken()) {return <p>Loading...</p>}
+    if(this.state.loading && TokenService.hasAuthToken()) {return <p className="loading-p">Loading...</p>}
     const value = {
       notes: this.state.notes,
       projects: this.state.projects,

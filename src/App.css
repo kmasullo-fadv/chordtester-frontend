@@ -3,3 +3,10 @@ html {
     background-image: linear-gradient(to top left, rgb(0, 0, 0), rgb(31, 31, 31));
     font-family: sans-serif;
 }
+
+.loading-p {
+    color: lightgrey;
+    text-align: center;
+    font-size: 50px;
+    margin-top: 100px;
+}
