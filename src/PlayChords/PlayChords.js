@@ -86,6 +86,7 @@ export default class PlayChords extends Component {
         const name = e.target['chord-name'].value;
         if(projectId){
             ProjectsService.addChordToProject(projectId, name, notes)
+            this.context.refresh()
             e.target['chord-name'].value = ''
             e.target['select-menu'].value = ''
             this.handleSetNotes();

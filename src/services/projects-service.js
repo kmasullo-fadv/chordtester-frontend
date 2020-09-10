@@ -71,6 +71,7 @@ const ProjectsService = {
             ? res.json().then(e => e.Promise.reject(e))
             : res.json()
         )
+        
     },
     deleteProject(projectId) {
         return fetch(`${config.API_ENDPOINT}/projects/${projectId}`, {

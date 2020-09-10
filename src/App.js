@@ -28,6 +28,10 @@ class App extends Component {
   };
 
   componentDidMount() {
+    this.refresh();
+  };
+
+  refresh = () => {
     this.setState({chords: []});
     if(TokenService.hasAuthToken()){
       this.setState({loading: true})
@@ -40,7 +44,7 @@ class App extends Component {
         this.setState( {loading: false, chords: chords.flat() })
       })
     }
-  };
+  }
 
 
   setLogIn = () => {
@@ -107,7 +111,8 @@ class App extends Component {
       logOut: this.setLogOut,
       logIn: this.setLogIn,
       storeUserProjects: this.storeUserProjects,
-      addUserProject: this.addUserProject
+      addUserProject: this.addUserProject,
+      refresh: this.refresh
     };
     return (
       <Context.Provider value={value}>
