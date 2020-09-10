@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service'
 import './Account.css'
-const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/
+const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/
 
 
 export default class Account extends Component {
