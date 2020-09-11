@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AuthApiService from '../../services/auth-api-service'
+import TokenService from '../../services/token-service';
 import './Account.css'
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&])[\S]+/
 
@@ -13,17 +14,22 @@ export default class Account extends Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const username = e.target['create-username'].value.toLowerCase();
-        const name = e.target['name'].value;
-        const password = e.target['create-password'].value;
+        let username = e.target['create-username'].value.toLowerCase();
+        let name = e.target['name'].value;
+        let password = e.target['create-password'].value;
         this.setState({error: null})
         AuthApiService.postUser({username, name, password})
+        .then(() => AuthApiService.postLogin({
+            username: username.toLowerCase(),
+            password: password
+        }))
         .then(user => {
-            username.value = ''
-            name.value = ''
-            password.value = ''
-            this.props.onLoginSuccess()
+            username = ''
+            name = ''
+            password = ''
+            TokenService.saveAuthToken(user.authToken)
         })
+        .then(() => this.props.onLoginSuccess())
         .catch(res => {
             this.setState({error: res.error})
         })

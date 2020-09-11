@@ -24,9 +24,8 @@ export default class Account extends Component {
             username.value = '';
             password.value = '';
             TokenService.saveAuthToken(res.authToken);
-            this.props.onLoginSuccess();
-            
         })
+        .then(() => this.props.onLoginSuccess())
         .catch(res => {
             console.log(res)
             this.setState({ error: res.error })
