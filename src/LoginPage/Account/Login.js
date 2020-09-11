@@ -38,9 +38,9 @@ export default class Account extends Component {
                 <h2>Log Into Your Account</h2><br/>
                 <form onSubmit={this.handleSubmitJwtAuth}>
                     <label htmlFor="username">Username:</label>
-                    <input type="text" id="username" /><br />
+                    <input type="text" id="username" defaultValue="fonz"/><br />
                     <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" /><br />
+                    <input type="password" id="password" defaultValue="Password1!" /><br />
                     <button type="submit">Submit</button>
                 </form>
             </section>

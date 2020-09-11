@@ -14,6 +14,7 @@ export default class About extends Component {
                 access to your instrument.
                 </p>
                 <button><Link to={'/'}>Try Now</Link></button>
+                <p>Or <button><Link to={'/login'}>sign in</Link></button> with the public account to enjoy the account-holder's experience without creating an account.</p>
             </section>
         )
     }
